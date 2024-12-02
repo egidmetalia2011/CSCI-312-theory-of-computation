@@ -3,11 +3,11 @@ def load_transition_table(file_path):
         with open(file_path, 'r') as f:
             lines = f.readlines()
 
-        print("File Content:\n", lines) #debug
+        #print("File Content:\n", lines) #debug
         
         #Parse the alphabet from the first line
         alphabet = lines[0].strip().split()
-        print("Alphabet:", alphabet) #debug
+        #print("Alphabet:", alphabet) #debug
 
         #initialize data structures
         transitions = {}
@@ -19,18 +19,18 @@ def load_transition_table(file_path):
             if not line.strip():
                 continue
 
-            print("Parsing line: ", line.strip())#debug
+            #print("Parsing line: ", line.strip())#debug
             parts = line.strip().split()
-            print("split parts: ", parts)#debug
+            #print("split parts: ", parts)#debug
 
             state = int(parts[0]) #first element is the state number
-            print("Mapping transitions for state:", state)  # Debugging
+            #print("Mapping transitions for state:", state)  # Debugging
 
             if len (parts[1:1 + len(alphabet)]) != len(alphabet):
                 raise ValueError(f"invlaiid number of transitions for state {state}")
             
             transitions[state] = dict(zip(alphabet, map(int, parts[1:1+len(alphabet)])))
-            print(f"Parsed state {state}: {transitions[state]}")  # Debugging
+            #print(f"Parsed state {state}: {transitions[state]}")  # Debugging
 
             #check for 'S' and 'F' in the last part of the line
             if len(parts) > len(alphabet) + 1 and 'S' in parts[-1]:
@@ -66,10 +66,10 @@ def process_string(transitions, start_state, final_states, input_string):
 if __name__ == "__main__":
     try:
         alphabet, transitions, start_state, final_states = load_transition_table('transition_table_sample.txt')
-        print("Alphabet:", alphabet)
-        print("Transitions:", transitions)
-        print("Start State:", start_state)
-        print("Final States:", final_states)
+        #print("Alphabet:", alphabet)
+        #print("Transitions:", transitions)
+        #print("Start State:", start_state)
+        #print("Final States:", final_states)
 
         #load input string
         input_string = load_input_string('sample_string.txt')
@@ -84,6 +84,3 @@ if __name__ == "__main__":
 
     with open('transition_table_sample.txt', 'r') as f:
         print("transition table file content: \n", f.read())
-    
-    with open('sample_string.txt', 'r') as f:
-        print("input string file content:\n", f.read())
